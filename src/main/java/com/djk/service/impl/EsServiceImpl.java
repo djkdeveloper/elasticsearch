@@ -5,7 +5,6 @@ import com.djk.bean.EsDocument;
 import com.djk.bean.EsRequest;
 import com.djk.bean.EsSearchRequest;
 import com.djk.service.EsService;
-import org.apache.lucene.search.Query;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.common.lang3.StringUtils;
 import org.elasticsearch.common.xcontent.XContentBuilder;
