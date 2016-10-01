@@ -7,12 +7,14 @@ import org.elasticsearch.action.admin.indices.mapping.put.PutMappingResponse;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.lang3.StringUtils;
 import org.elasticsearch.common.settings.ImmutableSettings;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.util.CollectionUtils;
 
@@ -166,5 +168,17 @@ public class ESClientManager {
                 .setSource(esDocument.getJson())
                 .request();
     }
+
+    /**
+     * 查询
+     * @param index
+     * @param type
+     * @param queryBuilder
+     * @return
+     */
+    public SearchResponse query(String index, String type, QueryBuilder queryBuilder) {
+        return client.prepareSearch(index).setTypes(type).setQuery(queryBuilder).execute().actionGet();
+    }
+
 
 }

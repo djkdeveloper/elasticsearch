@@ -3,6 +3,7 @@ package com.djk.controller;
 import com.alibaba.fastjson.JSON;
 import com.djk.bean.EsDocument;
 import com.djk.bean.EsRequest;
+import com.djk.bean.EsSearchRequest;
 import com.djk.bean.Spu;
 import com.djk.service.EsService;
 import org.springframework.stereotype.Controller;
@@ -52,6 +53,11 @@ public class EsController {
         return esService.batchAddDateToEs(esRequest);
     }
 
+    @RequestMapping("/querybyid")
+    @ResponseBody
+    public String queryById(EsSearchRequest esRequest) {
+        return esService.queryById(esRequest);
+    }
 
     /**
      * 构造模拟数据

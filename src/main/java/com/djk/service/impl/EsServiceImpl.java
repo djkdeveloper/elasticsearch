@@ -3,11 +3,15 @@ package com.djk.service.impl;
 import com.djk.bean.ESClientManager;
 import com.djk.bean.EsDocument;
 import com.djk.bean.EsRequest;
+import com.djk.bean.EsSearchRequest;
 import com.djk.service.EsService;
+import org.apache.lucene.search.Query;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.common.lang3.StringUtils;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
+import org.elasticsearch.index.query.BaseQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -86,6 +90,12 @@ public class EsServiceImpl implements EsService {
         return esClientManager.batchAddDateToEs(esRequest.getIndex(), esRequest.getMapping(), getIndexRequest(esRequest.getEsDocuments()));
     }
 
+    @Override
+    public String queryById(EsSearchRequest request) {
+        BaseQueryBuilder baseQueryBuilder = QueryBuilders.termQuery("id",request.getId());
+        System.out.print("DSL: \n" + baseQueryBuilder.toString());
+        return esClientManager.query(request.getIndex(), request.getType(), baseQueryBuilder).toString();
+    }
 
     /*****************************************************************************************************
      *                                                                                                   *

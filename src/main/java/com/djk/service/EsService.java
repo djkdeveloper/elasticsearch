@@ -1,6 +1,7 @@
 package com.djk.service;
 
 import com.djk.bean.EsRequest;
+import com.djk.bean.EsSearchRequest;
 
 /**
  * Created by dujinkai on 16/10/1.
@@ -30,4 +31,12 @@ public interface EsService {
      * @return
      */
     boolean batchAddDateToEs(EsRequest esRequest);
+
+    /**
+     * 根据id查询
+     *
+     * @param request
+     * @return
+     */
+    String queryById(EsSearchRequest request);
 }
